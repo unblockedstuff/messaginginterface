@@ -2,32 +2,51 @@
 
 /* Light Theme (Default) */
 :root {
-    --body-bg-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    --chat-bg-color: rgba(255, 255, 255, 0.1); /* Glassmorphism on light bg */
-    --sender-msg-bg: #007bff;
-    --receiver-msg-bg: #e9e9eb; /* Light grey for receiver */
-    --text-color-dark: #333; /* For text on light backgrounds like receiver messages */
-    --text-color-light: #ffffff; /* For text on dark backgrounds like sender messages or dark theme inputs */
-    --text-color-primary: #333; /* General text on body if not specified */
-    --text-color-header: #ffffff; /* Header text color for light theme */
-    --border-color: rgba(255, 255, 255, 0.25); /* Light border for glass elements */
-    --input-bg: rgba(255, 255, 255, 0.15); /* Translucent white for input on light theme */
-    --input-text-color: #ffffff; /* Text inside input for light theme */
-    --input-placeholder-color: rgba(255, 255, 255, 0.6);
-    --button-bg: #007bff;
-    --button-hover-bg: #0056b3;
-    --icon-color: #555; /* Icons on message actions (usually on light message bg) */
-    --timestamp-color: #777; /* Timestamp on receiver messages */
-    --sender-timestamp-color: rgba(255,255,255,0.7);
-    --header-bg: rgba(0, 0, 0, 0.1); /* Slightly dark translucent header for light theme */
-    --scrollbar-track-bg: rgba(0,0,0,0.1);
-    --scrollbar-thumb-bg: rgba(255,255,255,0.3);
-    --scrollbar-thumb-hover-bg: rgba(255,255,255,0.5);
-    --toggle-slider-bg: #ccc;
-    --toggle-slider-checked-bg: var(--button-bg);
+    /* Base Colors - Monochromatic Light */
+    --base-white: #ffffff;
+    --base-light-grey1: #f7f7f7; /* Body background */
+    --base-light-grey2: #eeeeee; /* Receiver messages, slightly darker elements */
+    --base-light-grey3: #dddddd; /* Borders, accents */
+    --base-light-grey4: #cccccc; /* Timestamp, placeholder text */
+    --base-dark-grey1: #4a4a4a;  /* Primary text */
+    --base-dark-grey2: #6a6a6a;  /* Secondary text, icons */
+    --base-dark-grey3: #2a2a2a;  /* Hovered/active elements */
+
+    --body-bg-image: linear-gradient(135deg, var(--base-light-grey1) 0%, var(--base-light-grey2) 100%);
+    --chat-bg-color: rgba(255, 255, 255, 0.6); /* More opaque glass for better readability */
+    --sender-msg-bg: linear-gradient(135deg, var(--base-dark-grey2) 0%, var(--base-dark-grey1) 100%);
+    --receiver-msg-bg: linear-gradient(135deg, var(--base-light-grey2) 0%, var(--base-light-grey1) 100%);
+    
+    --text-color-dark: var(--base-dark-grey1);   /* Primary text on light backgrounds */
+    --text-color-light: var(--base-white);      /* Text on dark backgrounds (e.g., sender messages) */
+    --text-color-primary: var(--base-dark-grey1); /* General body text */
+    --text-color-header: var(--base-dark-grey1);  /* Header text (on light glass) */
+    
+    --border-color: rgba(0, 0, 0, 0.1); /* Subtle dark border for glass elements */
+    
+    --input-bg: rgba(255, 255, 255, 0.5); 
+    --input-text-color: var(--base-dark-grey1);
+    --input-placeholder-color: var(--base-light-grey4);
+    
+    --button-bg: var(--base-dark-grey1);
+    --button-hover-bg: var(--base-dark-grey3);
+    --button-text-color: var(--base-white);
+
+    --icon-color: var(--base-dark-grey2); 
+    --timestamp-color: var(--base-light-grey4); 
+    --sender-timestamp-color: var(--base-light-grey3);
+    
+    --header-bg: rgba(255, 255, 255, 0.4); /* Light translucent header */
+    
+    --scrollbar-track-bg: rgba(0,0,0,0.05);
+    --scrollbar-thumb-bg: rgba(0,0,0,0.2);
+    --scrollbar-thumb-hover-bg: rgba(0,0,0,0.3);
+    
+    --toggle-slider-bg: var(--base-light-grey3);
+    --toggle-slider-checked-bg: var(--base-dark-grey2);
 
     --modern-font: 'Inter', sans-serif;
-    --border-radius-large: 20px;
+    --border-radius-large: 18px; /* Slightly reduced for minimalism */
     --border-radius-medium: 15px;
     --border-radius-small: 10px;
     --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17); /* Default shadow */
@@ -35,31 +54,51 @@
 
 /* Dark Theme */
 body.dark-theme {
-    --body-bg-image: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%); /* Dark gradient */
-    --chat-bg-color: rgba(0, 0, 0, 0.2); /* Darker glassmorphism */
-    --sender-msg-bg: #0056b3; /* Slightly adjusted sender color for dark theme */
-    --receiver-msg-bg: #2f3a4c; /* Darker receiver messages */
-    --text-color-dark: #e0e0e0; /* Light text for dark backgrounds (now primary text) */
-    --text-color-light: #ffffff; /* Still pure white for specific elements if needed */
-    --text-color-primary: #e0e0e0; /* General text on body for dark theme */
-    --text-color-header: #ffffff; /* Header text color for dark theme */
-    --border-color: rgba(255, 255, 255, 0.15); /* Lighter border for dark glass */
-    --input-bg: rgba(0, 0, 0, 0.2); /* Translucent dark for input on dark theme */
-    --input-text-color: #e0e0e0; /* Text inside input for dark theme */
-    --input-placeholder-color: rgba(255, 255, 255, 0.4);
-    --button-bg: #0069d9;
-    --button-hover-bg: #007bff;
-    --icon-color: #bbb; /* Lighter icons for dark theme message actions */
-    --timestamp-color: #aaa; /* Lighter timestamp on receiver messages */
-    --sender-timestamp-color: rgba(255,255,255,0.6);
-    --header-bg: rgba(0, 0, 0, 0.25); /* Darker translucent header for dark theme */
-    --scrollbar-track-bg: rgba(255,255,255,0.1);
-    --scrollbar-thumb-bg: rgba(0,0,0,0.3);
-    --scrollbar-thumb-hover-bg: rgba(0,0,0,0.5);
-    --toggle-slider-bg: #555;
-    --toggle-slider-checked-bg: var(--button-bg);
+    /* Base Colors - Monochromatic Dark */
+    --base-black: #1a1a1a;         /* Body background */
+    --base-dark-grey1: #2c2c2c;     /* Chat bg, receiver messages */
+    --base-dark-grey2: #3a3a3a;     /* Sender messages, slightly lighter elements */
+    --base-dark-grey3: #4a4a4a;     /* Borders, accents */
+    --base-dark-grey4: #5a5a5a;     /* Timestamp, placeholder text */
+    --base-light-grey1: #e0e0e0;    /* Primary text */
+    --base-light-grey2: #b0b0b0;    /* Secondary text, icons */
+    --base-light-grey3: #f0f0f0;    /* Hovered/active elements */
+    --base-white: #ffffff;          /* Pure white for specific highlights if needed */
 
-    --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Darker shadow for dark theme */
+    --body-bg-image: linear-gradient(135deg, var(--base-black) 0%, var(--base-dark-grey1) 100%);
+    --chat-bg-color: rgba(10, 10, 10, 0.5); /* More opaque dark glass */
+    --sender-msg-bg: linear-gradient(135deg, var(--base-dark-grey3) 0%, var(--base-dark-grey2) 100%);
+    --receiver-msg-bg: linear-gradient(135deg, var(--base-dark-grey1) 0%, var(--base-black) 100%);
+    
+    --text-color-dark: var(--base-light-grey1);   /* Primary text on dark backgrounds */
+    --text-color-light: var(--base-white);      /* Text on 'sender' like (now darker) backgrounds */
+    --text-color-primary: var(--base-light-grey1); /* General body text */
+    --text-color-header: var(--base-light-grey1);  /* Header text (on dark glass) */
+
+    --border-color: rgba(255, 255, 255, 0.1); /* Subtle light border for dark glass elements */
+    
+    --input-bg: rgba(10, 10, 10, 0.4);
+    --input-text-color: var(--base-light-grey1);
+    --input-placeholder-color: var(--base-dark-grey4);
+    
+    --button-bg: var(--base-light-grey1);
+    --button-hover-bg: var(--base-light-grey3);
+    --button-text-color: var(--base-black);
+
+    --icon-color: var(--base-light-grey2); 
+    --timestamp-color: var(--base-dark-grey4); 
+    --sender-timestamp-color: var(--base-dark-grey3);
+    
+    --header-bg: rgba(10, 10, 10, 0.3); /* Dark translucent header */
+    
+    --scrollbar-track-bg: rgba(255,255,255,0.05);
+    --scrollbar-thumb-bg: rgba(255,255,255,0.2);
+    --scrollbar-thumb-hover-bg: rgba(255,255,255,0.3);
+    
+    --toggle-slider-bg: var(--base-dark-grey3);
+    --toggle-slider-checked-bg: var(--base-light-grey2);
+
+    --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); /* Darker shadow */
 }
 
 
@@ -371,29 +410,42 @@ body.dark-theme .attachment-btn:hover, body.dark-theme .send-btn:hover {
     padding: 8px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-small);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-color-dark);
+    background: var(--base-light-grey1); /* Themed */
+    color: var(--text-color-dark); /* Themed */
     font-family: var(--modern-font);
     margin-bottom: 5px;
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+body.dark-theme .message .edit-input {
+    background: var(--base-dark-grey1); /* Themed for dark */
+    color: var(--text-color-dark); /* Themed for dark */
 }
 
 .message .edit-actions button {
-    background: var(--button-bg);
-    color: var(--text-color-light);
+    background: var(--button-bg); /* Uses new monochromatic button vars from :root */
+    color: var(--button-text-color); /* Uses new monochromatic button text vars */
     border: none;
     padding: 5px 10px;
     border-radius: var(--border-radius-small);
     cursor: pointer;
     margin-left: 5px;
     font-size: 0.8em;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .message .edit-actions button.cancel-edit-btn {
-    background: #6c757d;
+    background: var(--base-dark-grey2); /* Monochromatic cancel for light theme */
+}
+body.dark-theme .message .edit-actions button.cancel-edit-btn {
+    background: var(--base-dark-grey4); /* Monochromatic cancel for dark theme */
+    color: var(--base-light-grey1); /* Ensure text is readable on dark cancel */
 }
 
+
 .message .edit-actions button:hover {
-    opacity: 0.9;
+    background-color: var(--button-hover-bg);
+    /* color: var(--button-text-color); /* ensure text color remains if hover only changes bg */
+    opacity: 1; /* Full opacity on hover */
 }
 
 
@@ -462,18 +514,20 @@ body.dark-theme .attachment-btn:hover, body.dark-theme .send-btn:hover {
 /* Sidebar Styles */
 .main-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align items to the top */
-    gap: 20px; /* Space between sidebar and chat container */
+    justify-content: center; /* Center the whole group of sidebars + chat */
+    align-items: flex-start; 
+    gap: 20px; 
     width: 100%;
-    max-width: 1100px; /* Max width for sidebar + chat + gap */
+    /* Increased max-width to accommodate two sidebars */
+    max-width: calc(280px + 800px + 280px + 40px); /* L_sidebar + Chat + R_sidebar + gaps */
+    /* max-width: 1400px; /* Simplified approx max-width */
 }
 
-.sidebar {
-    width: 280px; /* Adjust as needed */
-    height: 90vh; /* Same as chat container */
-    max-height: 700px; /* Same as chat container */
-    background: var(--chat-bg-color); /* Use themed glass background */
+.left-sidebar, .right-sidebar {
+    width: 280px; 
+    height: 90vh; 
+    max-height: 700px; 
+    background: var(--chat-bg-color); 
     border-radius: var(--border-radius-large);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(15px);
@@ -482,46 +536,175 @@ body.dark-theme .attachment-btn:hover, body.dark-theme .send-btn:hover {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    /* margin-right: 20px; /* Removed, using gap on wrapper */
-    color: var(--text-color-primary); /* Themed text color */
-    flex-shrink: 0; /* Prevent sidebar from shrinking if chat container needs space */
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, width 0.3s ease;
+    color: var(--text-color-primary); 
+    flex-shrink: 0; 
 }
 
-.sidebar-header {
+.left-sidebar .sidebar-header, .right-sidebar .sidebar-header { /* Combined for shared styles */
     padding: 15px 20px;
-    background: var(--header-bg); /* Use themed header background */
+    background: var(--header-bg); 
     color: var(--text-color-header);
     text-align: center;
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
-.sidebar-header h2 {
-    font-size: 1.2em; /* Slightly smaller than chat header */
+.left-sidebar .sidebar-header h2, .right-sidebar .sidebar-header h2 {
+    font-size: 1.2em; 
     font-weight: 600;
 }
 
-.sidebar-content {
+.left-sidebar .sidebar-content, .right-sidebar .sidebar-content {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    list-style: none;
 }
 
-.sidebar-content li {
+.left-sidebar .sidebar-content ul, .right-sidebar .sidebar-content ul { /* If ul is used inside */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left-sidebar .sidebar-content li { /* Specific to contact list items */
     padding: 10px 0;
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.left-sidebar .sidebar-content li.settings-entry {
+    margin-top: auto; /* Push settings to bottom */
+    border-top: 1px solid var(--border-color);
 }
 
-.sidebar-content li:hover {
-    background-color: rgba(255,255,255,0.05); /* Subtle hover for light theme */
+
+.left-sidebar .sidebar-content li:hover {
+    background-color: rgba(0,0,0,0.05); /* Monochromatic hover */
+    color: var(--text-color-primary); /* Ensure text color is consistent on hover */
 }
-body.dark-theme .sidebar-content li:hover {
-    background-color: rgba(0,0,0,0.1); /* Subtle hover for dark theme */
+body.dark-theme .left-sidebar .sidebar-content li:hover {
+    background-color: rgba(255,255,255,0.05); /* Monochromatic hover for dark */
 }
+
+.left-sidebar .sidebar-footer {
+    padding: 10px 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.left-sidebar .settings-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.left-sidebar .settings-entry:hover {
+    color: var(--text-color-primary); /* Ensure good contrast on hover */
+    opacity: 0.8;
+}
+.left-sidebar .settings-entry svg {
+    stroke: var(--icon-color);
+}
+
+
+.left-sidebar .sidebar-content li.active {
+    background-color: rgba(0,0,0,0.08); /* Slightly darker for active in light mode */
+    font-weight: 500;
+}
+body.dark-theme .left-sidebar .sidebar-content li.active {
+    background-color: rgba(255,255,255,0.08); /* Slightly lighter for active in dark mode */
+    font-weight: 500;
+}
+
+
+/* Right Sidebar Specifics */
+/* (Styles for .right-sidebar .sidebar-header, .right-sidebar .sidebar-content are already covered by shared rules) */
+
+.settings-view {
+    height: 100%; /* Take full height of parent (.left-sidebar) */
+    display: flex;
+    flex-direction: column;
+}
+.settings-view .sidebar-header { /* Specific styling for settings header if needed */
+    display: flex;
+    align-items: center;
+}
+.settings-view .back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color-header);
+    font-size: 1.2em; /* Match icon size if needed */
+    padding: 5px;
+    margin-right: 10px; /* Space between back button and Settings title */
+    cursor: pointer;
+}
+.settings-view .back-btn svg {
+    stroke: currentColor;
+}
+.settings-view .sidebar-content {
+    padding-top: 10px; /* Less padding if header is already there */
+}
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0; /* More padding for settings items */
+    border-bottom: 1px solid var(--border-color);
+}
+.setting-item:last-child {
+    border-bottom: none;
+}
+.setting-item span {
+    font-size: 0.95em;
+}
+/* Ensure the theme-switch within settings-item is aligned properly */
+.setting-item .theme-switch {
+    position: relative; /* Override absolute positioning from global .theme-switch if any */
+    top: auto;
+    right: auto;
+    /* width and height are already set for .theme-switch */
+}
+
+
+.right-sidebar .profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.right-sidebar .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid var(--border-color);
+}
+.right-sidebar .profile-username {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.right-sidebar .details-section h4 {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--icon-color); /* Use a secondary text color */
+    margin-top: 15px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.right-sidebar .placeholder-content {
+    font-size: 0.9em;
+    color: var(--timestamp-color); /* Use a muted color */
+    padding: 10px;
+    background: rgba(0,0,0,0.02);
+    border-radius: var(--border-radius-small);
+}
+body.dark-theme .right-sidebar .placeholder-content {
+    background: rgba(255,255,255,0.02);
+}
+
 
 /* Typing Indicator Styles */
 .typing-indicator {
@@ -585,10 +768,36 @@ body.dark-theme .typing-indicator {
 
 
 /* Responsive adjustments */
+@media (max-width: 1200px) { /* Adjust breakpoint for hiding right sidebar */
+    .right-sidebar {
+        display: none; /* Hide right sidebar first */
+    }
+    .main-wrapper {
+        /* Adjust max-width if right sidebar is hidden */
+        max-width: calc(280px + 800px + 20px); /* L_sidebar + Chat + gap */
+    }
+}
+
+@media (max-width: 900px) { /* Adjust breakpoint for hiding left sidebar */
+    .left-sidebar {
+        display: none; /* Hide left sidebar */
+    }
+    .main-wrapper {
+        /* Adjust max-width if both sidebars are hidden */
+        max-width: 800px; /* Just chat container */
+        justify-content: center; /* Center chat container when sidebars are gone */
+    }
+     .chat-container {
+        width: 100%; /* Allow chat container to take more space */
+    }
+}
+
 @media (max-width: 600px) {
-    .sidebar {
-        display: none; /* Hide sidebar on small screens by default */
-        /* Alternative: make it a slide-in menu or place it above/below chat */
+    /* On very small screens, chat container is already full width from previous rules */
+    /* Ensure main-wrapper doesn't add extra constraints if not already handled */
+    .main-wrapper {
+        padding: 0; /* Remove padding if chat container is edge-to-edge */
+        gap: 0;
     }
     .chat-container {
         width: 100%;
