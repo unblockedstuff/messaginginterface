@@ -4,7 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.querySelector('.send-btn');
     const attachmentBtn = document.querySelector('.attachment-btn');
     const fileInput = document.getElementById('file-input');
-    const themeToggle = document.getElementById('theme-toggle');
+    // const themeToggle = document.getElementById('theme-toggle'); // OLD - REMOVED from header
+
+    // Left Sidebar elements
+    const contactListUL = document.getElementById('contact-list'); // The UL for contacts
+    const leftSidebarFooter = document.querySelector('.left-sidebar .sidebar-footer');
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsView = document.getElementById('settings-view');
+    const backToContactsBtn = document.getElementById('back-to-contacts-btn');
+    const themeToggleSettings = document.getElementById('theme-toggle-settings'); // New toggle in settings
+
+    // Chat Header elements
+    const chatHeaderMain = document.getElementById('chat-header-main'); 
+
+    // Right Sidebar (Contact Details Panel) elements
+    const contactDetailsPanel = document.getElementById('contact-details-panel');
+    const contactDetailsAvatar = document.getElementById('contact-details-avatar');
+    const contactDetailsUsernameHeader = document.getElementById('contact-details-username'); // Header in right sidebar
+    const contactNameDisplay = document.getElementById('contact-name-display'); // Username below avatar
 
     let typingIndicatorElement = null; // To store the typing indicator
 
@@ -12,15 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
-            if (themeToggle) themeToggle.checked = true;
+            if (themeToggleSettings) themeToggleSettings.checked = true;
         } else {
             document.body.classList.remove('dark-theme');
-            if (themeToggle) themeToggle.checked = false;
+            if (themeToggleSettings) themeToggleSettings.checked = false;
         }
     }
 
-    function toggleTheme() {
-        if (themeToggle && themeToggle.checked) {
+    function handleThemeToggle() { // Renamed from toggleTheme
+        if (themeToggleSettings && themeToggleSettings.checked) {
             localStorage.setItem('theme', 'dark');
             applyTheme('dark');
         } else {
@@ -31,12 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Apply saved theme on load
     const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light
-    applyTheme(savedTheme);
+    applyTheme(savedTheme); // This will also set the checkbox state
 
-    if (themeToggle) {
-        themeToggle.addEventListener('change', toggleTheme);
+    if (themeToggleSettings) {
+        themeToggleSettings.addEventListener('change', handleThemeToggle);
     }
     // --- END: Theme Toggle Functionality ---
+
+    // --- START: Settings View Toggle ---
+    function showSettingsView() {
+        if (contactListUL) contactListUL.style.display = 'none';
+        if (leftSidebarFooter) leftSidebarFooter.style.display = 'none';
+        if (settingsView) settingsView.style.display = 'flex'; // .settings-view is flex column
+    }
+
+    function hideSettingsView() {
+        if (settingsView) settingsView.style.display = 'none';
+        if (contactListUL) contactListUL.style.display = ''; // Revert to default (block/flex)
+        if (leftSidebarFooter) leftSidebarFooter.style.display = ''; // Revert to default
+    }
+
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', showSettingsView);
+    }
+    if (backToContactsBtn) {
+        backToContactsBtn.addEventListener('click', hideSettingsView);
+    }
+    // --- END: Settings View Toggle ---
+
 
     // --- START: Typing Indicator Functionality ---
     function createTypingIndicator() {
@@ -76,6 +115,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // --- END: Typing Indicator Functionality ---
+
+    // --- START: Left Sidebar Functionality ---
+    function selectContact(contactElement) {
+        const contactId = contactElement.dataset.contactId;
+        const contactName = contactElement.dataset.contactName;
+        const contactAvatar = contactElement.dataset.contactAvatar;
+
+        // 0. Remove 'active' class from previously active contact
+        const currentlyActive = contactList.querySelector('li.active');
+        if (currentlyActive) {
+            currentlyActive.classList.remove('active');
+        }
+        // 1. Add 'active' class to current contact
+        contactElement.classList.add('active');
+
+        // 2. Update Main Chat Header
+        if (chatHeaderMain) {
+            const chatHeaderH1 = chatHeaderMain.querySelector('h1');
+            if (chatHeaderH1) chatHeaderH1.textContent = `Chat with ${contactName}`;
+        }
+
+        // 3. Update Right Sidebar (Contact Details Panel)
+        if (contactDetailsPanel) {
+            contactDetailsAvatar.src = contactAvatar;
+            contactDetailsAvatar.alt = `${contactName}'s profile picture`;
+            contactDetailsUsernameHeader.textContent = contactName; // Update header in right sidebar
+            contactNameDisplay.textContent = contactName; // Update name below avatar
+            // TODO: Clear/update media, files, links sections (for now they are static placeholders)
+        }
+
+        // 4. Clear current messages and show a placeholder
+        messageArea.innerHTML = ''; // Clear existing messages
+        const welcomeMessage = createMessageElement(`Started chat with ${contactName}. Send a message!`, 'receiver');
+        // Temporarily disable animation for this initial message to prevent it from looking like a new incoming one
+        welcomeMessage.style.animation = 'none'; 
+        welcomeMessage.style.opacity = '1';
+        messageArea.appendChild(welcomeMessage);
+        messageArea.scrollTop = messageArea.scrollHeight;
+
+        // Hide typing indicator if it was visible for a previous chat
+        hideTypingIndicator(); 
+    }
+
+    if (contactList) {
+        contactList.addEventListener('click', (event) => {
+            const clickedLi = event.target.closest('li');
+            if (clickedLi && clickedLi.dataset.contactId) { // Ensure it's a contact item
+                selectContact(clickedLi);
+            }
+            // Settings button click will be handled in step 23
+            // if (clickedLi && clickedLi.id === 'settings-btn') { ... } 
+        });
+    }
+    // --- END: Left Sidebar Functionality ---
 
     // --- START: Message Sending Functionality ---
     function createMessageElement(text, senderType) {
