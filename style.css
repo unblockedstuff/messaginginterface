@@ -1,25 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Light Theme (Default) */
 :root {
-    --body-bg-color: #f0f2f5;
-    --chat-bg-color: rgba(255, 255, 255, 0.1);
+    --body-bg-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    --chat-bg-color: rgba(255, 255, 255, 0.1); /* Glassmorphism on light bg */
     --sender-msg-bg: #007bff;
-    --receiver-msg-bg: #e9e9eb;
-    --text-color-dark: #333;
-    --text-color-light: #fff;
-    --border-color: rgba(255, 255, 255, 0.25);
-    --input-bg: rgba(255, 255, 255, 0.15);
+    --receiver-msg-bg: #e9e9eb; /* Light grey for receiver */
+    --text-color-dark: #333; /* For text on light backgrounds like receiver messages */
+    --text-color-light: #ffffff; /* For text on dark backgrounds like sender messages or dark theme inputs */
+    --text-color-primary: #333; /* General text on body if not specified */
+    --text-color-header: #ffffff; /* Header text color for light theme */
+    --border-color: rgba(255, 255, 255, 0.25); /* Light border for glass elements */
+    --input-bg: rgba(255, 255, 255, 0.15); /* Translucent white for input on light theme */
+    --input-text-color: #ffffff; /* Text inside input for light theme */
+    --input-placeholder-color: rgba(255, 255, 255, 0.6);
     --button-bg: #007bff;
     --button-hover-bg: #0056b3;
-    --icon-color: #555;
-    --timestamp-color: #777;
-    --header-bg: rgba(0, 0, 0, 0.1);
-    --modern-font: 'Poppins', sans-serif;
+    --icon-color: #555; /* Icons on message actions (usually on light message bg) */
+    --timestamp-color: #777; /* Timestamp on receiver messages */
+    --sender-timestamp-color: rgba(255,255,255,0.7);
+    --header-bg: rgba(0, 0, 0, 0.1); /* Slightly dark translucent header for light theme */
+    --scrollbar-track-bg: rgba(0,0,0,0.1);
+    --scrollbar-thumb-bg: rgba(255,255,255,0.3);
+    --scrollbar-thumb-hover-bg: rgba(255,255,255,0.5);
+    --toggle-slider-bg: #ccc;
+    --toggle-slider-checked-bg: var(--button-bg);
+
+    --modern-font: 'Inter', sans-serif;
     --border-radius-large: 20px;
     --border-radius-medium: 15px;
     --border-radius-small: 10px;
-    --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17); /* Default shadow */
 }
+
+/* Dark Theme */
+body.dark-theme {
+    --body-bg-image: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%); /* Dark gradient */
+    --chat-bg-color: rgba(0, 0, 0, 0.2); /* Darker glassmorphism */
+    --sender-msg-bg: #0056b3; /* Slightly adjusted sender color for dark theme */
+    --receiver-msg-bg: #2f3a4c; /* Darker receiver messages */
+    --text-color-dark: #e0e0e0; /* Light text for dark backgrounds (now primary text) */
+    --text-color-light: #ffffff; /* Still pure white for specific elements if needed */
+    --text-color-primary: #e0e0e0; /* General text on body for dark theme */
+    --text-color-header: #ffffff; /* Header text color for dark theme */
+    --border-color: rgba(255, 255, 255, 0.15); /* Lighter border for dark glass */
+    --input-bg: rgba(0, 0, 0, 0.2); /* Translucent dark for input on dark theme */
+    --input-text-color: #e0e0e0; /* Text inside input for dark theme */
+    --input-placeholder-color: rgba(255, 255, 255, 0.4);
+    --button-bg: #0069d9;
+    --button-hover-bg: #007bff;
+    --icon-color: #bbb; /* Lighter icons for dark theme message actions */
+    --timestamp-color: #aaa; /* Lighter timestamp on receiver messages */
+    --sender-timestamp-color: rgba(255,255,255,0.6);
+    --header-bg: rgba(0, 0, 0, 0.25); /* Darker translucent header for dark theme */
+    --scrollbar-track-bg: rgba(255,255,255,0.1);
+    --scrollbar-thumb-bg: rgba(0,0,0,0.3);
+    --scrollbar-thumb-hover-bg: rgba(0,0,0,0.5);
+    --toggle-slider-bg: #555;
+    --toggle-slider-checked-bg: var(--button-bg);
+
+    --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Darker shadow for dark theme */
+}
+
 
 * {
     margin: 0;
@@ -29,13 +71,15 @@
 
 body {
     font-family: var(--modern-font);
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background-image: var(--body-bg-image);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: var(--text-color-dark);
+    padding: 20px; /* Add some padding to body for spacing from viewport edges */
+    color: var(--text-color-primary); /* Use primary text color */
     overflow: hidden; /* Prevents scrollbars from body gradient extending too far */
+    transition: background-image 0.4s ease, color 0.4s ease; /* Smooth theme transition */
 }
 
 .chat-container {
@@ -52,14 +96,16 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Crucial for keeping content within rounded borders */
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; /* Smooth theme transition */
 }
 
 .chat-header {
     padding: 15px 20px;
     background: var(--header-bg);
-    color: var(--text-color-light); /* Light text for darker header */
+    color: var(--text-color-header); /* Use header text color */
     text-align: center;
     border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; /* Smooth theme transition */
 }
 
 .chat-header h1 {
@@ -71,7 +117,61 @@ body {
 .chat-header p {
     font-size: 0.9em;
     font-weight: 300;
+    position: relative; /* For positioning the toggle absolutely if needed */
 }
+
+/* Theme Toggle Switch styles */
+.theme-switch {
+    position: absolute;
+    top: 15px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    display: inline-block;
+    width: 50px; /* Adjusted width */
+    height: 26px; /* Adjusted height */
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-slider-bg);
+    transition: .4s;
+    border-radius: 26px; /* Adjusted for height */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; /* Adjusted size */
+    width: 20px;  /* Adjusted size */
+    left: 3px;   /* Adjusted position */
+    bottom: 3px; /* Adjusted position */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--button-bg); /* Use theme color for active toggle */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--button-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px); /* Adjusted translation */
+}
+/* End Theme Toggle Switch styles */
 
 .message-area {
     flex-grow: 1;
@@ -88,17 +188,17 @@ body {
 }
 
 .message-area::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1);
+    background: var(--scrollbar-track-bg);
     border-radius: 10px;
 }
 
 .message-area::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.3);
+    background: var(--scrollbar-thumb-bg);
     border-radius: 10px;
 }
 
 .message-area::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.5);
+    background: var(--scrollbar-thumb-hover-bg);
 }
 
 
@@ -110,6 +210,7 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1.5;
+    transition: background-color 0.4s ease; /* Smooth theme transition */
 }
 
 .message p {
@@ -119,26 +220,27 @@ body {
 
 .message.sender {
     background-color: var(--sender-msg-bg);
-    color: var(--text-color-light);
+    color: var(--text-color-light); /* Sender text is usually light */
     align-self: flex-end;
     border-bottom-right-radius: var(--border-radius-small); /* Chat bubble effect */
 }
 
 .message.receiver {
     background-color: var(--receiver-msg-bg);
-    color: var(--text-color-dark);
+    color: var(--text-color-dark); /* Receiver text is usually dark on light, light on dark */
     align-self: flex-start;
     border-bottom-left-radius: var(--border-radius-small); /* Chat bubble effect */
 }
 
 .timestamp {
     font-size: 0.75em;
-    color: rgba(0,0,0,0.5); /* Darker timestamp for receiver */
+    color: var(--timestamp-color); 
     align-self: flex-end;
+    transition: color 0.4s ease; /* Smooth theme transition */
 }
 
 .message.sender .timestamp {
-    color: rgba(255,255,255,0.7); /* Lighter timestamp for sender */
+    color: var(--sender-timestamp-color); 
 }
 
 .message-actions {
@@ -162,26 +264,36 @@ body {
 }
 
 .message-actions button {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2); /* This might need adjustment for dark theme if too light */
     border: none;
     color: var(--icon-color);
     padding: 5px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 0.9em;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.4s ease;
 }
 
 .message-actions button:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.4); /* This might need adjustment for dark theme */
 }
+
+/* Specific overrides for dark theme action buttons if needed */
+body.dark-theme .message-actions button {
+    background: rgba(0, 0, 0, 0.2);
+}
+body.dark-theme .message-actions button:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
 
 .message-input-area {
     display: flex;
     align-items: center;
     padding: 15px 20px;
     border-top: 1px solid var(--border-color);
-    background: var(--header-bg); /* Consistent with header */
+    background: var(--header-bg); /* Consistent with header, uses themed var */
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .message-input {
@@ -190,7 +302,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-medium);
     background: var(--input-bg);
-    color: var(--text-color-light); /* Light text for dark input area */
+    color: var(--input-text-color); 
     font-family: var(--modern-font);
     font-size: 1em;
     resize: none; /* Prevent manual resizing */
@@ -198,22 +310,29 @@ body {
     min-height: 45px; /* Ensure it's tall enough */
     max-height: 100px; /* Prevent excessive growth */
     overflow-y: auto; /* Add scroll if text is too long */
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
 .message-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--input-placeholder-color);
+    transition: color 0.4s ease;
 }
 
 .message-input:focus {
     outline: none;
     border-color: var(--button-bg);
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 2px var(--button-bg-alpha, rgba(0, 123, 255, 0.25)); /* Add var for alpha or adjust */
 }
+/* We'll need to define --button-bg-alpha or adjust box-shadow for dark theme if needed */
+body.dark-theme .message-input:focus {
+    box-shadow: 0 0 0 2px var(--button-bg-alpha, rgba(0, 105, 217, 0.35)); /* Example for dark theme */
+}
+
 
 .attachment-btn, .send-btn {
     background: transparent;
     border: none;
-    color: var(--text-color-light);
+    color: var(--input-text-color); /* Match input text color for consistency in footer */
     font-size: 1.5em;
     padding: 8px;
     cursor: pointer;
@@ -221,12 +340,30 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.4s ease;
 }
 
 .attachment-btn:hover, .send-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Light hover for light theme */
 }
+body.dark-theme .attachment-btn:hover, body.dark-theme .send-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Dark hover for dark theme */
+}
+
+/* Styling for SVG icons within buttons */
+.icon-btn svg {
+    width: 100%; /* Make SVG take button's inner width */
+    height: 100%; /* Make SVG take button's inner height */
+    stroke: currentColor; /* Inherit color from button's text color */
+}
+
+/* Adjustments for message action icons if they also become SVGs */
+.message-actions button svg {
+    width: 16px; /* Example size, can be adjusted */
+    height: 16px; /* Example size, can be adjusted */
+    stroke: currentColor;
+}
+
 
 /* Edit mode styling */
 .message .edit-input {
@@ -260,23 +397,52 @@ body {
 }
 
 
-/* Initial Animation for messages */
-.message {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInMessage 0.3s ease forwards;
+/* Initial Animation for messages - Now more specific */
+.message { /* Base style, will be overridden by specific animations */
+    opacity: 0; 
+}
+
+.message.sender.animate-slide-in-right {
+    animation: slideInFromRight 0.4s ease forwards;
+}
+
+.message.receiver.animate-slide-in-left {
+    animation: slideInFromLeft 0.4s ease forwards;
 }
 
 .message-deleting {
     animation: fadeOutMessage 0.3s ease forwards;
 }
 
-@keyframes fadeInMessage {
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px) translateY(10px); /* Start from right and slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px) translateY(10px); /* Start from left and slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* Old fadeInMessage - can be removed if not used elsewhere, or kept for other elements */
+/* @keyframes fadeInMessage {
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
+} */
 
 @keyframes fadeOutMessage {
     from {
@@ -293,8 +459,137 @@ body {
     }
 }
 
+/* Sidebar Styles */
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between sidebar and chat container */
+    width: 100%;
+    max-width: 1100px; /* Max width for sidebar + chat + gap */
+}
+
+.sidebar {
+    width: 280px; /* Adjust as needed */
+    height: 90vh; /* Same as chat container */
+    max-height: 700px; /* Same as chat container */
+    background: var(--chat-bg-color); /* Use themed glass background */
+    border-radius: var(--border-radius-large);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    /* margin-right: 20px; /* Removed, using gap on wrapper */
+    color: var(--text-color-primary); /* Themed text color */
+    flex-shrink: 0; /* Prevent sidebar from shrinking if chat container needs space */
+}
+
+.sidebar-header {
+    padding: 15px 20px;
+    background: var(--header-bg); /* Use themed header background */
+    color: var(--text-color-header);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2em; /* Slightly smaller than chat header */
+    font-weight: 600;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.sidebar-content li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-content li:hover {
+    background-color: rgba(255,255,255,0.05); /* Subtle hover for light theme */
+}
+body.dark-theme .sidebar-content li:hover {
+    background-color: rgba(0,0,0,0.1); /* Subtle hover for dark theme */
+}
+
+/* Typing Indicator Styles */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-medium);
+    background-color: var(--receiver-msg-bg); /* Same as receiver for consistency */
+    color: var(--text-color-dark); /* Match receiver text color */
+    align-self: flex-start; /* Position like a receiver message */
+    margin-bottom: 10px; /* Space below it */
+    max-width: fit-content;
+    opacity: 0; /* Initially hidden, fade in with JS */
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+body.dark-theme .typing-indicator {
+    background-color: var(--receiver-msg-bg);
+    color: var(--text-color-dark);
+}
+
+.typing-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: currentColor; /* Use text color for dots */
+    border-radius: 50%;
+    animation: typing 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: -0.3s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: -0.15s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes typing {
+    0%, 80%, 100% {
+        transform: scale(0.5);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* End Typing Indicator Styles */
+
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
+    .sidebar {
+        display: none; /* Hide sidebar on small screens by default */
+        /* Alternative: make it a slide-in menu or place it above/below chat */
+    }
     .chat-container {
         width: 100%;
         height: 100vh;
