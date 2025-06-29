@@ -7,27 +7,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-wrapper"> <!-- New wrapper -->
-        <aside class="sidebar">
+    <div class="main-wrapper"> <!-- Wrapper for all content -->
+        <!-- Left Sidebar for Contacts/Navigation -->
+        <aside class="left-sidebar"> 
             <div class="sidebar-header">
-                <h2>Contacts</h2> <!-- Placeholder -->
+                <h2>Contacts</h2>
             </div>
-            <ul class="sidebar-content">
-                <li>Contact 1</li> <!-- Placeholder -->
-                <li>Contact 2</li> <!-- Placeholder -->
-                <li>Settings</li> <!-- Placeholder -->
+            <ul class="sidebar-content" id="contact-list">
+                <li data-contact-id="1" data-contact-name="Alice Wonderland" data-contact-avatar="https://via.placeholder.com/100/FFA07A/000000?text=AW">Alice Wonderland</li>
+                <li data-contact-id="2" data-contact-name="Bob The Builder" data-contact-avatar="https://via.placeholder.com/100/ADD8E6/000000?text=BTB">Bob The Builder</li>
             </ul>
+            <div class="sidebar-footer"> <!-- Footer for settings button -->
+                <div id="settings-btn" class="settings-entry">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V15A1.65 1.65 0 0 0 19.4 15z"></path></svg>
+                    <span>Settings</span>
+                </div>
+            </div>
+
+            <!-- Settings View (Initially Hidden) -->
+            <div class="settings-view" id="settings-view" style="display: none;">
+                <div class="sidebar-header">
+                    <button id="back-to-contacts-btn" class="icon-btn back-btn" aria-label="Back to contacts">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                    <h2>Settings</h2>
+                </div>
+                <div class="sidebar-content">
+                    <!-- Theme toggle will be moved here -->
+                    <div class="setting-item">
+                        <span>Dark Mode</span>
+                        <!-- Placeholder for the theme toggle switch -->
+                        <label class="theme-switch" for="theme-toggle-settings" aria-label="Toggle dark mode">
+                            <input type="checkbox" id="theme-toggle-settings">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <!-- Other settings can go here -->
+                </div>
+            </div>
         </aside>
 
+        <!-- Main Chat Area -->
         <div class="chat-container">
-            <header class="chat-header">
+            <header class="chat-header" id="chat-header-main">
                 <h1>Chat with Bot</h1>
-            <!-- Theme Toggle Switch -->
-            <label class="theme-switch" for="theme-toggle" aria-label="Toggle dark mode">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider round"></span>
-            </label>
-            <p>Online</p> <!-- Moved p after toggle for layout reasons, can be adjusted with CSS -->
+            <!-- Theme Toggle Switch REMOVED from here -->
+            <p>Online</p> 
         </header>
         <main class="message-area" role="log" aria-live="polite" aria-atomic="false">
             <!-- Messages will be appended here by JavaScript -->
@@ -58,18 +83,43 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
         </footer>
-    </div>
-    <script src="script.js"></script>
+    </div> <!-- End of chat-container -->
 
-    <aside class="sidebar">
+    <!-- Right Sidebar for Contact Details -->
+    <aside class="right-sidebar" id="contact-details-panel">
         <div class="sidebar-header">
-            <h2>Contacts</h2> <!-- Placeholder -->
+            <h2 id="contact-details-username">User Details</h2>
         </div>
-        <ul class="sidebar-content">
-            <li>Contact 1</li> <!-- Placeholder -->
-            <li>Contact 2</li> <!-- Placeholder -->
-            <li>Settings</li> <!-- Placeholder -->
-        </ul>
+        <div class="sidebar-content">
+            <div class="profile-section">
+                <img src="https://via.placeholder.com/120/cccccc/4a4a4a?text=Select" alt="Profile Picture" id="contact-details-avatar" class="profile-avatar">
+                <h3 id="contact-name-display" class="profile-username">Select a contact</h3>
+            </div>
+            <div class="details-section">
+                <h4>Media</h4>
+                <div class="media-grid placeholder-content">
+                    <span>No media yet</span>
+                    <!-- Placeholder for media items -->
+                </div>
+            </div>
+            <div class="details-section">
+                <h4>Files</h4>
+                <ul class="file-list placeholder-content">
+                    <li>No files yet</li>
+                    <!-- Placeholder for file items -->
+                </ul>
+            </div>
+            <div class="details-section">
+                <h4>Links</h4>
+                <ul class="link-list placeholder-content">
+                    <li>No links yet</li>
+                    <!-- Placeholder for link items -->
+                </ul>
+            </div>
+        </div>
     </aside>
+
+    </div> <!-- End of main-wrapper -->
+    <script src="script.js"></script>
 </body>
 </html>
