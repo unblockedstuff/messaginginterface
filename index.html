@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Messaging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>Chat with Bot</h1>
+            <p>Online</p>
+        </header>
+        <main class="message-area" role="log" aria-live="polite" aria-atomic="false">
+            <!-- Messages will be appended here by JavaScript -->
+            <div class="message sender">
+                <p>Hey there! This is a sample sender message.</p>
+                <span class="timestamp">10:00 AM</span>
+                <div class="message-actions">
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                </div>
+            </div>
+            <div class="message receiver">
+                <p>Hi! This is a sample receiver message. How can I help you today?</p>
+                <span class="timestamp">10:01 AM</span>
+                 <div class="message-actions">
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                </div>
+            </div>
+        </main>
+        <footer class="message-input-area">
+            <button class="attachment-btn" aria-label="Attach file">📎</button>
+            <input type="file" id="file-input" style="display: none;" aria-hidden="true">
+            <textarea type="text" class="message-input" placeholder="Type your message..." aria-label="Message input"></textarea>
+            <button class="send-btn" aria-label="Send message">▶️</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
